@@ -1,9 +1,11 @@
+import Navbar from "#components/navBar";
+
 const App = () =>
 {
 return (
-    <div>
-        <h1 className="text-3xl font-bold underline">Welcome to my Macfolio</h1>
-    </div>
+  <main>
+    <Navbar />
+  </main>
 );
 };
 export default App;
