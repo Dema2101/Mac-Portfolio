@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 
 
 const FONT_WEIGHTS = {
-    subtitle: {min:200, max:500, default:200},
+    subtitle: {min:200, max:700, default:200},
     title: {min:400, max:900, default:400},
 }
 
@@ -13,7 +13,7 @@ const renderText = (text,className,baseWeight=400) =>{
 
     return [...text].map((char, i) => (
 <span key={i} className={className} style={{
-    fontVariationSettings: `"wght" ${baseWeight}`}}
+    fontWeight: baseWeight}}
     >
 
         {char === " " ? "\u00A0" : char}
@@ -43,14 +43,25 @@ const handleMouseMove = (e) => {
     letters.forEach((letter) => {
         const { left: l,width: w } = letter.getBoundingClientRect();
         const distance = Math.abs(mouseX - (l-left + w/2));
-        const intensity = Math.exp(-(distance ** 2) / 2000);
+        const intensity = Math.exp(-(distance ** 2) / 7000);
 
         animateLetter(letter, min + (max - min)*intensity);
     });
 };
 
-    container.addEventListener("mousemove", handleMouseMove);
+const handleMouseLeave = () => {
+    letters.forEach((letter) => 
+    animateLetter(letter, base, 0.3 ));
+    
+};
 
+    container.addEventListener("mousemove", handleMouseMove);
+     container.addEventListener("mouseleave", handleMouseLeave);
+
+     return  () => {
+        container.removeEventListener("mousemove", handleMouseMove);
+        container.removeEventListener("mouseleave", handleMouseLeave);
+    };
 };
 
 
@@ -60,8 +71,15 @@ const subtitleRef = useRef(null);
 
 
     useGSAP (() => {
-        setupTextHover(titleRef.current, "title");
-        setupTextHover(subtitleRef.current, "subtitle");
+      const titleCleanup =  setupTextHover(titleRef.current, "title");
+       const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
+        
+
+        return () => {
+            subtitleCleanup();
+            titleCleanup();
+        }
+
     }, []);
 
 
@@ -72,7 +90,7 @@ return (
     {renderText(
         "Hey, I'm Marko! Welcome to my",
         "text-3xl font-georama",
-        100,
+        200,
         )} 
         </p>
 
@@ -80,6 +98,7 @@ return (
     {renderText(
         "portfolio",
         "text-9xl italic font-georama",
+        400,
         )} 
 </h1>
 
