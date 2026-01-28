@@ -61,7 +61,7 @@ const Dock = () => {
 
 
     const toggleApp = (app) => {
-        // Implement open window logic
+        // Implementacija open window logic
 
         if(!app.canOpen) return;
 

@@ -3,7 +3,8 @@ import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 
 import {Dock, Navbar,Welcome, Home } from "#components";
-import { Safari, Terminal, Resume, Finder, Text, Image, Contact} from "#windows";
+import { Safari, Terminal, Resume, Finder, Text, Image, Contact, Gallery} from "#windows";
+
 
 gsap.registerPlugin(Draggable);
 
@@ -23,6 +24,7 @@ return (
     <Image />
     <Contact />
     <Home />  
+    <Gallery />
   </main>
 );
 };

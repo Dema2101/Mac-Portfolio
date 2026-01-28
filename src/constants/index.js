@@ -4,6 +4,13 @@ const navLinks = [
     name: "Projects",
     type: "finder",
   },
+
+  {
+    id: 2,
+    name: "Gallery",
+    type: "photos",
+  },
+
   {
     id: 3,
     name: "Contact",
@@ -72,6 +79,10 @@ const dockApps = [
     icon: "trash.png",
     canOpen: false,
   },
+
+
+
+
 ];
 
 const blogPosts = [
